@@ -259,7 +259,7 @@ namespace Microsoft.AspNet.Diagnostics
             return Enumerable.Range(start, count).Select(i => string.Format("Line{0}", i));
         }
 
-        private ErrorPageMiddleware GetErrorPageMiddleware(
+        private ExceptionHandlerAndDisplayPageMiddleware GetErrorPageMiddleware(
             IFileProvider fileProvider = null, int sourceCodeLineCount = 6)
         {
             var errorPageOptions = new ErrorPageOptions();
@@ -270,7 +270,7 @@ namespace Microsoft.AspNet.Diagnostics
                 errorPageOptions.FileProvider = fileProvider;
             }
 
-            var middleware = new ErrorPageMiddleware(
+            var middleware = new ExceptionHandlerAndDisplayPageMiddleware(
                 (httpContext) => { return Task.FromResult(0); },
                 errorPageOptions,
                 new LoggerFactory(),

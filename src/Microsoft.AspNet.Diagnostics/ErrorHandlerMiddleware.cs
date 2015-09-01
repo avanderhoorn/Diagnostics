@@ -10,18 +10,18 @@ using Microsoft.Framework.Logging;
 
 namespace Microsoft.AspNet.Diagnostics
 {
-    public class ErrorHandlerMiddleware
+    public class ExceptionHandlerMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly ErrorHandlerOptions _options;
+        private readonly ExceptionHandlerOptions _options;
         private readonly ILogger _logger;
         private readonly Func<object, Task> _clearCacheHeadersDelegate;
 
-        public ErrorHandlerMiddleware(RequestDelegate next, ILoggerFactory loggerFactory, ErrorHandlerOptions options)
+        public ExceptionHandlerMiddleware(RequestDelegate next, ILoggerFactory loggerFactory, ExceptionHandlerOptions options)
         {
             _next = next;
             _options = options;
-            _logger = loggerFactory.CreateLogger<ErrorHandlerMiddleware>();
+            _logger = loggerFactory.CreateLogger<ExceptionHandlerMiddleware>();
             if (_options.ErrorHandler == null)
             {
                 _options.ErrorHandler = _next;
