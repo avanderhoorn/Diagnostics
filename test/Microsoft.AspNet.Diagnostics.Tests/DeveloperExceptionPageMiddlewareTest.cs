@@ -18,7 +18,7 @@ using Xunit;
 
 namespace Microsoft.AspNet.Diagnostics
 {
-    public class ErrorPageMiddlewareTest
+    public class DeveloperExceptionPageMiddlewareTest
     {
         [Theory]
         [InlineData("TestFiles/SourceFile.txt")]
@@ -100,7 +100,7 @@ namespace Microsoft.AspNet.Diagnostics
             // Arrange
             var provider = new EmbeddedFileProvider(
                 GetType().GetTypeInfo().Assembly,
-                baseNamespace: $"{typeof(ErrorPageMiddlewareTest).GetTypeInfo().Assembly.GetName().Name}.Resources");
+                baseNamespace: $"{typeof(DeveloperExceptionPageMiddlewareTest).GetTypeInfo().Assembly.GetName().Name}.Resources");
 
             // Act
             var middleware = GetErrorPageMiddleware(provider);
