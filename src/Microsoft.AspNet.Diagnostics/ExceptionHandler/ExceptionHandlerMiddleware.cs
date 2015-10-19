@@ -70,8 +70,11 @@ namespace Microsoft.AspNet.Diagnostics
                     context.Response.OnStarting(_clearCacheHeadersDelegate, context.Response);
 
                     await _options.ExceptionHandler(context);
-                    
-                    _diagnosticSource.Write("Microsoft.AspNet.Diagnostics.HandledException", new { httpContext = context, exception = ex });
+
+                    if (_diagnosticSource.IsEnabled("Microsoft.AspNet.Diagnostics.HandledException"))
+                    {
+                        _diagnosticSource.Write("Microsoft.AspNet.Diagnostics.HandledException", new { httpContext = context, exception = ex });
+                    }
 
                     // TODO: Optional re-throw? We'll re-throw the original exception by default if the error handler throws.
                     return;

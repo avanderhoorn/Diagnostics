@@ -91,7 +91,10 @@ namespace Microsoft.AspNet.Diagnostics
 
                     await DisplayException(context, ex);
 
-                    _diagnosticSource.Write("Microsoft.AspNet.Diagnostics.UnhandledException", new { httpContext = context, exception = ex });
+                    if (_diagnosticSource.IsEnabled("Microsoft.AspNet.Diagnostics.UnhandledException"))
+                    {
+                        _diagnosticSource.Write("Microsoft.AspNet.Diagnostics.UnhandledException", new { httpContext = context, exception = ex });
+                    }
 
                     return;
                 }
