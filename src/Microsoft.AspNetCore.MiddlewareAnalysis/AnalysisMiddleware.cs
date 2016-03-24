@@ -28,10 +28,9 @@ namespace Microsoft.AspNetCore.MiddlewareAnalysis
 
         public async Task Invoke(HttpContext httpContext)
         {
-            var startTimestamp = 0L;
+            var startTimestamp = Stopwatch.GetTimestamp();
             if (_diagnostics.IsEnabled("Microsoft.AspNetCore.MiddlewareAnalysis.MiddlewareStarting"))
             {
-                startTimestamp = Stopwatch.GetTimestamp();
                 _diagnostics.Write(
                     "Microsoft.AspNetCore.MiddlewareAnalysis.MiddlewareStarting",
                     new
