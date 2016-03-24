@@ -32,7 +32,15 @@ namespace Microsoft.AspNetCore.MiddlewareAnalysis
             if (_diagnostics.IsEnabled("Microsoft.AspNetCore.MiddlewareAnalysis.MiddlewareStarting"))
             {
                 startTimestamp = Stopwatch.GetTimestamp();
-                _diagnostics.Write("Microsoft.AspNetCore.MiddlewareAnalysis.MiddlewareStarting", new { name = _middlewareName, httpContext = httpContext, instanceId = _instanceId, timestamp = startTimestamp });
+                _diagnostics.Write(
+                    "Microsoft.AspNetCore.MiddlewareAnalysis.MiddlewareStarting",
+                    new
+                    {
+                        name = _middlewareName,
+                        httpContext = httpContext,
+                        instanceId = _instanceId,
+                        timestamp = startTimestamp,
+                    });
             }
 
             try
@@ -42,7 +50,16 @@ namespace Microsoft.AspNetCore.MiddlewareAnalysis
                 if (_diagnostics.IsEnabled("Microsoft.AspNetCore.MiddlewareAnalysis.MiddlewareFinished"))
                 {
                     var currentTimestamp = Stopwatch.GetTimestamp();
-                    _diagnostics.Write("Microsoft.AspNetCore.MiddlewareAnalysis.MiddlewareFinished", new { name = _middlewareName, httpContext = httpContext, instanceId = _instanceId, timestamp = currentTimestamp, duration = currentTimestamp - startTimestamp });
+                    _diagnostics.Write(
+                        "Microsoft.AspNetCore.MiddlewareAnalysis.MiddlewareFinished", 
+                        new
+                        {
+                            name = _middlewareName,
+                            httpContext = httpContext,
+                            instanceId = _instanceId,
+                            timestamp = currentTimestamp,
+                            duration = currentTimestamp - startTimestamp,
+                        });
                 }
             }
             catch (Exception ex)
@@ -50,7 +67,17 @@ namespace Microsoft.AspNetCore.MiddlewareAnalysis
                 if (_diagnostics.IsEnabled("Microsoft.AspNetCore.MiddlewareAnalysis.MiddlewareException"))
                 {
                     var currentTimestamp = Stopwatch.GetTimestamp();
-                    _diagnostics.Write("Microsoft.AspNetCore.MiddlewareAnalysis.MiddlewareException", new { name = _middlewareName, httpContext = httpContext, instanceId = _instanceId, timestamp = currentTimestamp, duration = currentTimestamp - startTimestamp, exception = ex });
+                    _diagnostics.Write(
+                        "Microsoft.AspNetCore.MiddlewareAnalysis.MiddlewareException", 
+                        new
+                        {
+                            name = _middlewareName,
+                            httpContext = httpContext,
+                            instanceId = _instanceId,
+                            timestamp = currentTimestamp,
+                            duration = currentTimestamp - startTimestamp,
+                            exception = ex,
+                        });
                 }
                 throw;
             }
